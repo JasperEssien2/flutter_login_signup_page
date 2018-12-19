@@ -811,7 +811,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
 }
 
 typedef SignInButtonClickedCallback = void Function(
-    {String email, String password});
+    String email, String password);
 
 typedef SignUpButtonClickedCallback = void Function(
     String firstname,

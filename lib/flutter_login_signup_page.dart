@@ -102,14 +102,20 @@ class LoginAndSignUpPage extends StatefulWidget {
   String backgroundImageUrl;
   SignInButtonClickedCallback signInButtonCallback;
   SignUpButtonClickedCallback signUpButtonCallback;
+  DecorationImage backgroundDecorationImageSignInUpHomePage;
+  DecorationImage backgroundDecorationImageSignInPage;
+  DecorationImage backgroundDecorationImageSignUpPage;
 
   LoginAndSignUpPage(
-      {this.imagePickerButtonClickedFunction,
-      this.imagePickerBackgroundColor,
-      this.backgroundImageUrl,
-      this.textFormOutlineColor,
-      this.signInButtonCallback,
-      this.signUpButtonCallback});
+      {@required this.imagePickerButtonClickedFunction,
+      @required this.imagePickerBackgroundColor,
+      @required this.backgroundImageUrl,
+      @required this.textFormOutlineColor,
+      @required this.signInButtonCallback,
+      @required this.signUpButtonCallback,
+      @required this.backgroundDecorationImageSignInPage,
+      @required this.backgroundDecorationImageSignInUpHomePage,
+      @required this.backgroundDecorationImageSignUpPage});
 
   @override
   _LoginAndSignUpPageState createState() => _LoginAndSignUpPageState();
@@ -142,7 +148,11 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
       new PageController(initialPage: 1, viewportFraction: 1.0);
 
   String _selectedTitle = "Title";
-  Image _selectedTitleIcon = Image.asset("images/mr.png", width: 40.0, height: 40.0,);
+  Image _selectedTitleIcon = Image.asset(
+    "images/mr.png",
+    width: 40.0,
+    height: 40.0,
+  );
 
   Country _selectedDialogCountry = CountryPickerUtils.getCountryByIsoCode('tr');
 
@@ -159,6 +169,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
 //    return _getLoginPage()
     return Container(
       height: MediaQuery.of(context).size.height,
+      decoration: new BoxDecoration(
+          image: widget.backgroundDecorationImageSignInUpHomePage),
       child: PageView(
         children: <Widget>[
           _getLoginPage(),
@@ -364,19 +376,23 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
   _getLoginPage() {
     return new Scaffold(
 //      resizeToAvoidBottomPadding: true,
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
+      body: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: new BoxDecoration(
+              image: widget.backgroundDecorationImageSignInPage),
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
 //          new Container(
 //            child: _getImageAndImagePicker(),
 //          ),
-          new Container(
-            height: MediaQuery.of(context).size.height,
-            child: _getSignInForm(),
-            alignment: Alignment.center,
-          ),
-        ],
-      ),
+              new Container(
+                height: MediaQuery.of(context).size.height,
+                child: _getSignInForm(),
+                alignment: Alignment.center,
+              ),
+            ],
+          )),
     );
   }
 
@@ -476,11 +492,31 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                       "Sister",
                       ""
                     ], <Image>[
-                      Image.asset("images/mr.png", width: 40.0, height: 40.0,),
-                      Image.asset("images/mrs.png", width: 40.0, height: 40.0,),
-                      Image.asset("images/mr.png", width: 40.0, height: 40.0,),
-                      Image.asset("images/mr.png", width: 40.0, height: 40.0,),
-                      Image.asset("images/pastor.png", width: 40.0, height: 40.0,)
+                      Image.asset(
+                        "images/mr.png",
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                      Image.asset(
+                        "images/mrs.png",
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                      Image.asset(
+                        "images/mr.png",
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                      Image.asset(
+                        "images/mr.png",
+                        width: 40.0,
+                        height: 40.0,
+                      ),
+                      Image.asset(
+                        "images/pastor.png",
+                        width: 40.0,
+                        height: 40.0,
+                      )
                     ])) +
                 _getDialogTextForm(
                     outlineColor: widget.textFormOutlineColor,
@@ -523,18 +559,22 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
   _getSignUpPage() {
     return new Scaffold(
 //      resizeToAvoidBottomPadding: true,
-      body: ListView(
-        children: <Widget>[
-          new Container(
-            child: _getSignUpForm(),
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(bottom: 32.0),
-          ),
-        ],
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: new BoxDecoration(
+            image: widget.backgroundDecorationImageSignUpPage),
+        child: ListView(
+          children: <Widget>[
+            new Container(
+              child: _getSignUpForm(),
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(bottom: 32.0),
+            ),
+          ],
+        ),
       ),
     );
   }
-
 
   _gotoLoginPage() {
     //controller_0To1.forward(from: 0.0);

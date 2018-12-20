@@ -17,6 +17,8 @@ _getTextForm({
   @required var validator,
   @required Color textFieldBackgroundColor,
   @required bool isPassword,
+  @required TextStyle errorTextStyle,
+  @required OutlineInputBorder errorBorder,
   double marginTop: 0.0,
   double marginBottom: 0.0,
 }) {
@@ -54,13 +56,9 @@ _getTextForm({
               controller: textEditController,
               validator: validator,
               decoration: new InputDecoration(
-                  enabledBorder: new OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide(
-                      color: outlineColor != null ? outlineColor : Colors.blue,
-                      width: 1.0,
-                    ),
-                  ),
+                errorBorder: new OutlineInputBorder(),
+                  errorStyle: errorTextStyle,
+                  enabledBorder: errorBorder,
                   prefixIcon: icon,
                   prefixStyle: new TextStyle(color: Colors.purple),
                   contentPadding: const EdgeInsets.only(
@@ -105,6 +103,8 @@ class LoginAndSignUpPage extends StatefulWidget {
   DecorationImage backgroundDecorationImageSignInUpHomePage;
   DecorationImage backgroundDecorationImageSignInPage;
   DecorationImage backgroundDecorationImageSignUpPage;
+  TextStyle errorTextStyle;
+  OutlineInputBorder errorBorder;
 
   LoginAndSignUpPage(
       {@required this.imagePickerButtonClickedFunction,
@@ -115,7 +115,9 @@ class LoginAndSignUpPage extends StatefulWidget {
       @required this.signUpButtonCallback,
       @required this.backgroundDecorationImageSignInPage,
       @required this.backgroundDecorationImageSignInUpHomePage,
-      @required this.backgroundDecorationImageSignUpPage});
+      @required this.backgroundDecorationImageSignUpPage,
+      @required this.errorTextStyle,
+      @required this.errorBorder});
 
   @override
   _LoginAndSignUpPageState createState() => _LoginAndSignUpPageState();
@@ -402,6 +404,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textFieldBackgroundColor: null,
                     isPassword: false,
                     validator: _emailValidator(loginEmailController.text),
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     marginTop: 32.0) +
                 _getTextForm(
                     icon: new Icon(Icons.lock),
@@ -412,6 +416,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textFieldBackgroundColor: null,
                     isPassword: true,
                     validator: _passwordValidator(loginPasswordController.text),
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     marginTop: 16.0,
                     marginBottom: 32.0) +
                 _getLoginButton(widget.signInButtonCallback)));
@@ -490,6 +496,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textFieldBackgroundColor: null,
                     validator: _nameValidator,
                     isPassword: false,
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     marginTop: 32.0) +
                 _getTextForm(
                     icon: new Icon(Icons.email),
@@ -500,6 +508,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     validator: _nameValidator,
                     textFieldBackgroundColor: null,
                     isPassword: false,
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     marginTop: 16.0) +
                 _getDialogTextForm(
                     outlineColor: widget.textFormOutlineColor,
@@ -544,6 +554,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                 _getTextForm(
                     icon: new Icon(Icons.email),
                     label: "Email",
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     outlineColor: widget.textFormOutlineColor,
                     context: context,
                     textEditController: signUpEmailController,
@@ -554,6 +566,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                 _getTextForm(
                     icon: new Icon(Icons.lock),
                     label: "Password",
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     outlineColor: widget.textFormOutlineColor,
                     context: context,
                     textEditController: signUpPasswordController,
@@ -563,6 +577,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     marginTop: 16.0) +
                 _getTextForm(
                     icon: new Icon(Icons.lock),
+                    errorBorder: widget.errorBorder,
+                    errorTextStyle: widget.errorTextStyle,
                     label: "Confirm Password",
                     outlineColor: widget.textFormOutlineColor,
                     context: context,

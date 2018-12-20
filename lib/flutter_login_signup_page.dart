@@ -364,7 +364,9 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
       body: Container(
           height: MediaQuery.of(context).size.height,
           decoration: new BoxDecoration(
-              image: widget.backgroundDecorationImageSignInPage),
+              image: widget.backgroundDecorationImageSignInPage,
+              color: Colors.black54,
+              backgroundBlendMode: BlendMode.darken),
           child: ListView(
             shrinkWrap: true,
             children: <Widget>[
@@ -410,7 +412,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textFieldBackgroundColor: null,
                     isPassword: true,
                     validator: _passwordValidator(loginPasswordController.text),
-                    marginTop: 16.0, marginBottom: 32.0) +
+                    marginTop: 16.0,
+                    marginBottom: 32.0) +
                 _getLoginButton(widget.signInButtonCallback)));
   }
 
@@ -577,7 +580,10 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
 //      resizeToAvoidBottomPadding: true,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: new BoxDecoration(image: widget.backgroundDecorationImageSignUpPage,),
+        decoration: new BoxDecoration(
+            image: widget.backgroundDecorationImageSignUpPage,
+            color: Colors.black54,
+            backgroundBlendMode: BlendMode.darken),
         child: ListView(
           children: <Widget>[
             new Container(
@@ -615,7 +621,10 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
         alignment: Alignment.bottomCenter,
 //        margin: EdgeInsets.only(left: 32.0, right: 32.0),
         height: MediaQuery.of(context).size.height,
-        decoration: new BoxDecoration(image: widget.backgroundDecorationImageSignInUpHomePage,),
+        decoration: new BoxDecoration(
+            image: widget.backgroundDecorationImageSignInUpHomePage,
+            color: Colors.black54,
+            backgroundBlendMode: BlendMode.darken),
         child: new Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -56,9 +56,8 @@ _getTextForm({
               controller: textEditController,
               validator: validator,
               decoration: new InputDecoration(
-                errorBorder: new OutlineInputBorder(),
+                errorBorder: errorBorder,
                   errorStyle: errorTextStyle,
-                  enabledBorder: errorBorder,
                   prefixIcon: icon,
                   prefixStyle: new TextStyle(color: Colors.purple),
                   contentPadding: const EdgeInsets.only(
@@ -739,6 +738,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
             data: Theme.of(context).copyWith(primaryColor: Colors.pink),
             child: new Dialog(
                 child: new ListView.builder(
+                  shrinkWrap: true,
               itemCount: titles.length,
               itemBuilder: (context, index) {
                 _selectedTitle = titles[0];

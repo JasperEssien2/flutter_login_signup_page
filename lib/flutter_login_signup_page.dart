@@ -402,7 +402,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textEditController: loginEmailController,
                     textFieldBackgroundColor: null,
                     isPassword: false,
-                    validator: _emailValidator(loginEmailController.text),
+                    validator: _emailValidator,
                     errorBorder: widget.errorBorder,
                     errorTextStyle: widget.errorTextStyle,
                     marginTop: 32.0) +
@@ -414,7 +414,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     textEditController: loginPasswordController,
                     textFieldBackgroundColor: null,
                     isPassword: true,
-                    validator: _passwordValidator(loginPasswordController.text),
+                    validator: _passwordValidator,
                     errorBorder: widget.errorBorder,
                     errorTextStyle: widget.errorTextStyle,
                     marginTop: 16.0,

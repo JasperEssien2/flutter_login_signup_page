@@ -357,21 +357,6 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
     ];
   }
 
-  _getLoginButton() {
-    return new Container(
-      margin: EdgeInsets.only(left: 32.0, right: 32.0),
-      alignment: Alignment.bottomCenter,
-      padding: EdgeInsets.all(4.0),
-      child: RaisedButton(
-          shape: new RoundedRectangleBorder(
-              side: new BorderSide(),
-              borderRadius: BorderRadius.circular(30.0)),
-          onPressed: null,
-          child: new Row(
-              children: <Widget>[new Expanded(child: new Text("Login"))])),
-    );
-  }
-
   ///This method returns login page
   _getLoginPage() {
     return new Scaffold(
@@ -401,8 +386,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
     _setSignUpControllersListeners();
 
     return new Form(
-//      key: _formKeyLogin,
-
+        key: _formKeyLogin,
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: _getImageAndImagePicker(
@@ -412,19 +396,44 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     label: "Email",
                     outlineColor: widget.textFormOutlineColor,
                     context: context,
-                    textEditController: null,
+                    textEditController: loginEmailController,
                     textFieldBackgroundColor: null,
                     isPassword: false,
+                    validator: _emailValidator(loginEmailController.text),
                     marginTop: 32.0) +
                 _getTextForm(
                     icon: new Icon(Icons.lock),
                     label: "Password",
                     outlineColor: widget.textFormOutlineColor,
                     context: context,
-                    textEditController: null,
+                    textEditController: loginPasswordController,
                     textFieldBackgroundColor: null,
                     isPassword: true,
-                    marginTop: 16.0)));
+                    validator: _passwordValidator(loginPasswordController.text),
+                    marginTop: 16.0, marginBottom: 32.0) +
+                _getLoginButton(widget.signInButtonCallback)));
+  }
+
+  _getLoginButton(SignInButtonClickedCallback callback) {
+    return <Widget>[
+      new Container(
+        margin: EdgeInsets.only(left: 32.0, right: 32.0),
+        alignment: Alignment.bottomCenter,
+        padding: EdgeInsets.all(4.0),
+        child: RaisedButton(
+            shape: new RoundedRectangleBorder(
+                side: new BorderSide(),
+                borderRadius: BorderRadius.circular(30.0)),
+            onPressed: () {
+              if (_formKeyLogin.currentState.validate()) {
+                callback(
+                    loginEmailController.text, loginPasswordController.text);
+              }
+            },
+            child: new Row(
+                children: <Widget>[new Expanded(child: new Text("Login"))])),
+      )
+    ];
   }
 
   _getSignUpButton(SignUpButtonClickedCallback callback) {
@@ -439,17 +448,24 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                 side: new BorderSide(),
                 borderRadius: BorderRadius.circular(30.0)),
             onPressed: () {
-              callback(
-                  signUpFirstNameController.text,
-                  signUpLastNameController.text,
-                  _selectedTitle,
-                  _selectedDialogCountry.name,
-                  signUpEmailController.text,
-                  signUpPasswordController.text,
-                  imageMainFile);
+              if (_formKeySignUp.currentState.validate()) {
+                if (_selectedTitle == "Title") {
+                  Scaffold.of(context).showSnackBar(
+                      new SnackBar(content: new Text("Please select a title")));
+                } else {
+                  callback(
+                      signUpFirstNameController.text,
+                      signUpLastNameController.text,
+                      _selectedTitle,
+                      _selectedDialogCountry.name,
+                      signUpEmailController.text,
+                      signUpPasswordController.text,
+                      imageMainFile);
+                }
+              }
             },
             child: new Row(
-                children: <Widget>[new Expanded(child: new Text("Login"))])),
+                children: <Widget>[new Expanded(child: new Text("SignUp"))])),
       )
     ];
   }
@@ -561,8 +577,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
 //      resizeToAvoidBottomPadding: true,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: new BoxDecoration(
-            image: widget.backgroundDecorationImageSignUpPage),
+        decoration: new BoxDecoration(image: widget.backgroundDecorationImageSignUpPage,),
         child: ListView(
           children: <Widget>[
             new Container(
@@ -600,6 +615,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
         alignment: Alignment.bottomCenter,
 //        margin: EdgeInsets.only(left: 32.0, right: 32.0),
         height: MediaQuery.of(context).size.height,
+        decoration: new BoxDecoration(image: widget.backgroundDecorationImageSignInUpHomePage,),
         child: new Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

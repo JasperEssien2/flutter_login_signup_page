@@ -790,14 +790,16 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
             width: 140.0,
           );
         } else if (snapshot.error != null) {
-          return const Text(
-            'Error picking image.',
-            textAlign: TextAlign.center,
+          Scaffold.of(context).showSnackBar(
+              new SnackBar(content: new Text("Error getting image!")));
+          return Container(
+            color: Colors.grey,
           );
         } else {
-          return const Text(
-            'You have not yet picked an image.',
-            textAlign: TextAlign.center,
+          Scaffold.of(context).showSnackBar(
+              new SnackBar(content: new Text("Error getting image!")));
+          return Container(
+            color: Colors.grey,
           );
         }
       },

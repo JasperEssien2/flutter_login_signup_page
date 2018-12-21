@@ -401,8 +401,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
         key: _formKeyLogin,
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _getImageAndImagePicker(
-                    imageUrl: null, imagePickerBackgroundColor: Colors.purple) +
+            children:
                 _getTextForm(
                     icon: new Icon(Icons.email),
                     label: "Email",
@@ -557,6 +556,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                       )
                     ])) +
                 _getDialogTextForm(
+                    marginTop: 16.0,
                     outlineColor: widget.textFormOutlineColor,
                     formTitle: "Country",
                     prefixIcon: _getCountryPrefixIcon()) +
@@ -796,8 +796,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
             color: Colors.grey,
           );
         } else {
-          Scaffold.of(context).showSnackBar(
-              new SnackBar(content: new Text("Error getting image!")));
+//          Scaffold.of(context).showSnackBar(
+//              new SnackBar(content: new Text("Error getting image!")));
           return Container(
             color: Colors.grey,
           );

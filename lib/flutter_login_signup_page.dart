@@ -27,7 +27,7 @@ _getTextForm({
       children: <Widget>[
         new Expanded(
           child: new Container(
-            margin: EdgeInsets.only(top: marginTop, bottom: marginBottom),
+            margin: EdgeInsets.only(top: marginTop, bottom: 16.0),
             padding: const EdgeInsets.only(left: 40.0),
             child: new Text(
               label,
@@ -43,7 +43,10 @@ _getTextForm({
     ),
     new Container(
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 10.0),
+      margin: const EdgeInsets.only(
+        left: 30.0,
+        right: 30.0,
+      ),
       alignment: Alignment.center,
       padding: const EdgeInsets.only(left: 0.0, right: 0.0),
       child: new Row(
@@ -56,7 +59,7 @@ _getTextForm({
               controller: textEditController,
               validator: validator,
               decoration: new InputDecoration(
-                errorBorder: errorBorder,
+                  errorBorder: errorBorder,
                   errorStyle: errorTextStyle,
                   prefixIcon: icon,
                   prefixStyle: new TextStyle(color: Colors.purple),
@@ -254,7 +257,8 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
     return <Widget>[
       new Row(
         children: <Widget>[
-          new Expanded(
+          new Container(
+            margin: EdgeInsets.only(top: marginTop),
             child: new Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: new Text(
@@ -272,7 +276,9 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
       new Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.only(
-            left: 30.0, right: 30.0, top: 10.0, bottom: 20.0),
+          left: 30.0,
+          right: 30.0,
+        ),
         alignment: Alignment.center,
         padding: const EdgeInsets.only(left: 0.0, right: 0.0),
         child: new Row(
@@ -319,41 +325,44 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
   }) {
     return <Widget>[
 //      new Expanded(
-      new Stack(
-        children: <Widget>[
-          new Positioned(
+      new Container(
+        margin: EdgeInsets.only(top: 32.0),
+        child: new Stack(
+          children: <Widget>[
+            new Positioned(
 //            height: 100.0,
 //            width: 100.0,
-            child: new CircleAvatar(
-              radius: 70.0,
-              child: ClipOval(
-                child: _previewImage(),
-              ),
-//        backgroundImage: AssetImage(''),
-              backgroundColor: Colors.grey,
-            ),
-          ),
-          new Positioned(
-              bottom: 0.0,
-              right: 0.0,
               child: new CircleAvatar(
-                radius: 18.0,
-                child: new IconButton(
-                  icon: new Icon(
-                    Icons.add_a_photo,
-                    color: Colors.white,
-                    size: 24.0,
-                  ),
-
-                  ///Lets user manage what happens if the imageButton is clicked
-                  onPressed: () {
-                    _openImagePicker(ImageSource.gallery);
-                  },
+                radius: 70.0,
+                child: ClipOval(
+                  child: _previewImage(),
                 ),
-                backgroundColor: imagePickerBackgroundColor,
-              ))
-        ],
-      ),
+//        backgroundImage: AssetImage(''),
+                backgroundColor: Colors.grey,
+              ),
+            ),
+            new Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                child: new CircleAvatar(
+                  radius: 18.0,
+                  child: new IconButton(
+                    icon: new Icon(
+                      Icons.add_a_photo,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+
+                    ///Lets user manage what happens if the imageButton is clicked
+                    onPressed: () {
+                      _openImagePicker(ImageSource.gallery);
+                    },
+                  ),
+                  backgroundColor: imagePickerBackgroundColor,
+                ))
+          ],
+        ),
+      )
 //      )
     ];
   }
@@ -407,25 +416,25 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                     errorTextStyle: widget.errorTextStyle,
                     marginTop: 32.0) +
                 _getTextForm(
-                    icon: new Icon(Icons.lock),
-                    label: "Password",
-                    outlineColor: widget.textFormOutlineColor,
-                    context: context,
-                    textEditController: loginPasswordController,
-                    textFieldBackgroundColor: null,
-                    isPassword: true,
-                    validator: _passwordValidator,
-                    errorBorder: widget.errorBorder,
-                    errorTextStyle: widget.errorTextStyle,
-                    marginTop: 16.0,
-                    marginBottom: 32.0) +
+                  icon: new Icon(Icons.lock),
+                  label: "Password",
+                  outlineColor: widget.textFormOutlineColor,
+                  context: context,
+                  textEditController: loginPasswordController,
+                  textFieldBackgroundColor: null,
+                  isPassword: true,
+                  validator: _passwordValidator,
+                  errorBorder: widget.errorBorder,
+                  errorTextStyle: widget.errorTextStyle,
+                  marginTop: 16.0,
+                ) +
                 _getLoginButton(widget.signInButtonCallback)));
   }
 
   _getLoginButton(SignInButtonClickedCallback callback) {
     return <Widget>[
       new Container(
-        margin: EdgeInsets.only(left: 32.0, right: 32.0),
+        margin: EdgeInsets.only(left: 32.0, right: 32.0, top: 32.0),
         alignment: Alignment.bottomCenter,
         padding: EdgeInsets.all(4.0),
         child: RaisedButton(
@@ -513,6 +522,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
                 _getDialogTextForm(
                     outlineColor: widget.textFormOutlineColor,
                     formTitle: "Title",
+                    marginTop: 16.0,
                     prefixIcon: _getTitlePrefixIcon(<String>[
                       "Mr.",
                       "Mrs.",
@@ -738,7 +748,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
             data: Theme.of(context).copyWith(primaryColor: Colors.pink),
             child: new Dialog(
                 child: new ListView.builder(
-                  shrinkWrap: true,
+              shrinkWrap: true,
               itemCount: titles.length,
               itemBuilder: (context, index) {
                 _selectedTitle = titles[0];

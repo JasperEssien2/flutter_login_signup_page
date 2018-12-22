@@ -251,7 +251,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
     @required String formTitle,
     @required Widget prefixIcon,
     @required double marginTop: 0.0,
-    @required double marginBottom: 0.0,
+    @required double marginBottom: 16.0,
     @required Color outlineColor,
   }) {
     return <Widget>[

@@ -330,8 +330,6 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
         child: new Stack(
           children: <Widget>[
             new Positioned(
-//            height: 100.0,
-//            width: 100.0,
               child: new CircleAvatar(
                 radius: 70.0,
                 child: ClipOval(
@@ -401,8 +399,7 @@ class _LoginAndSignUpPageState extends State<LoginAndSignUpPage> {
         key: _formKeyLogin,
         child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children:
-                _getTextForm(
+            children: _getTextForm(
                     icon: new Icon(Icons.email),
                     label: "Email",
                     outlineColor: widget.textFormOutlineColor,
